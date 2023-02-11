@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Root from './components/Root';
 import { getGitRepos, getRepoContributors, batchRequest } from './api/api';
 import './App.css';
 
@@ -18,17 +19,17 @@ function App() {
     getRepos();
   }, [getGitRepos]);
   
-  useEffect(() => {
-    const batchPosts = async () => {
-      const posts = await batchRequest(getRepoContributors, repos, 5);
-      setPosts(posts);
-    }
-    batchPosts();
-  }, [repos]);
+  // useEffect(() => {
+  //   const batchPosts = async () => {
+  //     const posts = await batchRequest(getRepoContributors, repos, 5);
+  //     setPosts(posts);
+  //   }
+  //   batchPosts();
+  // }, [repos]);
   console.log(posts);
   return (
     <div className="App">
-      { repos.length === 0 ? 'No repos found' : `${repos.length} fetched`}
+      <Root repos={repos} />
     </div>
   );
 }

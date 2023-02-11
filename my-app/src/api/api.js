@@ -51,3 +51,13 @@ export const batchRequest = async (api, data, limit) => {
   }
   return result;
 }
+
+export const fetchBlogsPosts = async (repos, perPage) => {
+  const repoChunk = repos.slice(0, perPage);
+  const batchPromises = [];
+  repoChunk.forEach(post => {
+      batchPromises.push(getRepoContributors(post.id))
+  });
+  const resp = await Promise.all(batchPromises);
+  return [...resp];
+}
