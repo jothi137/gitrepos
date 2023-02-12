@@ -8,7 +8,7 @@ import Blogs from './Blogs';
 export default function Root({ repos }) {
     const perPageOptions = [10, 20, 50]
     const [perPage, setPerPage] = useState(10);
-    const [blogs, setBlogs] = useState(10);
+    const [blogs, setBlogs] = useState([]);
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -24,9 +24,11 @@ export default function Root({ repos }) {
             setBlogs(blogs);
         }
         fetchBlogs();
-    }, [perPage])
+    }, [perPage, repos]);
+
     return <>
         {`Showing ${perPage} blogs`}
+        
         <DropdownButton id="dropdown-basic-button" title={`${perPage} Per Page`}>
             {renderDropDownItems()}
         </DropdownButton>
